@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AL-AZZAWI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#020617;
+  --accent:#38bdf8;
+  --text:#fff;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  color:var(--text);
+  background:radial-gradient(circle at 20% 20%,#0f172a,#020617);
+  overflow-x:hidden;
+}
+
+/* particles */
+canvas{
+  position:fixed;
+  top:0;left:0;
+  z-index:-1;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px;
+  backdrop-filter:blur(10px);
+}
+
+h1{margin:0;letter-spacing:2px}
+
+button{
+  background:var(--accent);
+  border:none;
+  padding:8px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.hero{
+  text-align:center;
+  padding:100px 20px 40px;
+  animation:fadeIn 1.5s ease;
+}
+
+.hero h2{
+  font-size:36px;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.05);
+  padding:20px;
+  border-radius:20px;
+  margin:20px 0;
+  backdrop-filter:blur(12px);
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+.social a{
+  display:block;
+  padding:12px;
+  margin:8px 0;
+  border-radius:10px;
+  background:rgba(255,255,255,0.05);
+  transition:0.3s;
+  color:white;
+  text-decoration:none;
+}
+
+.social a:hover{
+  background:var(--accent);
+  color:black;
+  transform:scale(1.05);
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  opacity:0.6;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:600px){
+.hero h2{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<header>
+<h1>AL-AZZAWI</h1>
+<button onclick="toggleLanguage()">EN / AR</button>
+</header>
+
+<section class="hero">
+<h2 id="title">مرحباً بك في موقعي</h2>
+<p id="subtitle">طالب دراسات عليا - ماجستير علوم حياة</p>
+</section>
+
+<div class="container">
+
+<div class="card">
+<h3 id="aboutTitle">عني</h3>
+<p id="aboutText">شخص طموح في مجال علوم الحياة، مهتم بالتكنولوجيا والتطور العلمي.</p>
+</div>
+
+<div class="card">
+<h3 id="hobbyTitle">اهتماماتي</h3>
+<div class="grid">
+<div>🎮 <span id="gaming">الألعاب الإلكترونية</span></div>
+<div>🧬 <span id="science">علوم الحياة</span></div>
+<div>💻 <span id="tech">التكنولوجيا</span></div>
+</div>
+</div>
+
+<div class="card">
+<h3 id="contactTitle">التواصل</h3>
+<div class="social">
+<a href="https://www.tiktok.com/@a3tdr?_r=1&_t=ZS-955UH6kKx1g" target="_blank">📱 TikTok - اعتذر</a>
+<a href="https://www.snapchat.com/add/a3t.dr?share_id=TfdYtD7mPxA&locale=ar-AE" target="_blank">👻 Snapchat - اعتذر</a>
+<a href="mailto:hamodi581@gmail.com">📧 hamodi581@gmail.com</a>
+</div>
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 AL-AZZAWI</p>
+</footer>
+
+<script>
+// language toggle
+let ar=true;
+function toggleLanguage(){
+if(ar){
+document.documentElement.lang="en";
+document.body.style.direction="ltr";
+title.innerText="Welcome to My Website";
+subtitle.innerText="Postgraduate Student - MSc in Life Sciences";
+aboutTitle.innerText="About";
+aboutText.innerText="Ambitious life sciences student interested in science and technology.";
+hobbyTitle.innerText="Interests";
+gaming.innerText="Gaming";
+science.innerText="Life Sciences";
+tech.innerText="Technology";
+contactTitle.innerText="Contact";
+}else{
+document.documentElement.lang="ar";
+document.body.style.direction="rtl";
+title.innerText="مرحباً بك في موقعي";
+subtitle.innerText="طالب دراسات عليا - ماجستير علوم حياة";
+aboutTitle.innerText="عني";
+aboutText.innerText="شخص طموح في مجال علوم الحياة، مهتم بالتكنولوجيا والتطور العلمي.";
+hobbyTitle.innerText="اهتماماتي";
+gaming.innerText="الألعاب الإلكترونية";
+science.innerText="علوم الحياة";
+tech.innerText="التكنولوجيا";
+contactTitle.innerText="التواصل";
+}
+ar=!ar;
+}
+
+// particles effect
+const canvas=document.getElementById('bg');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+vx:Math.random()-0.5,
+vy:Math.random()-0.5
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.x+=p.vx;
+p.y+=p.vy;
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle='#38bdf8';
+ctx.fill();
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+window.onresize=()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+}
+</script>
+
+</body>
+</html>
